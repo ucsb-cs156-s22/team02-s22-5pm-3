@@ -5,7 +5,6 @@
 * Production: <https://s22-5pm-3-team02.herokuapp.com>
 * QA: <https://s22-5pm-3-team02-qa.herokuapp.com>
 
-
 # Setup before running application
 
 Before running the application for the first time,
