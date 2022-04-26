@@ -29,13 +29,32 @@ import javax.validation.Valid;
 public class UCSBDiningCommonsMenuItemController extends ApiController {
 
     @Autowired
-    UCSBDiningCommonsMeuItemRepository ucsbDiningCommonsMenuItemRepository;
+    UCSBDiningCommonsMenuItemRepository ucsbDiningCommonsMenuItemRepository;
 
-	@ApiOperation
+	@ApiOperation(value = "List all UCSB dining commons menu items")
 	@PreAuthorize("hasRole('ROLE_USER')")
 	@GetMapping("/all")
-	public Iterable<UCSBDiningCommonsMenuItem> allCommons() {
-        Iterable<UCSBDiningCommonsMenuItem> commons = ucsbDinigCommonsMenuItemRepository.findAll();
+	public Iterable<UCSBDiningCommonsMenuItem> allMenuItems() {
+        Iterable<UCSBDiningCommonsMenuItem> commons = ucsbDiningCommonsMenuItemRepository.findAll();
         return commons;
+    }
+
+    @ApiOperation(value = "Get a single menu item")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PostMapping("/post")
+    public UCSBDiningCommonsMenuItem postMenuItem(
+            @ApiParam("diningCommonsCode") @RequestParam String diningCommonsCode,
+            @ApiParam("name") @RequestParam String name,
+            @ApiParam("station") @RequestParam String station
+            )
+    {
+        UCSBDiningCommonsMenuItem menuItem = new UCSBDiningCommonsMenuItem();
+        menuItem.setDiningCommonsCode(diningCommonsCode);
+        menuItem.setName(name);
+        menuItem.setStation(station);
+
+        UCSBDiningCommonsMenuItem savedMenuItem = ucsbDiningCommonsMenuItemRepository.save(menuItem);
+
+        return savedMenuItem;
     }
 }
