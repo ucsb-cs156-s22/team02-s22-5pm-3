@@ -1,4 +1,4 @@
-# STARTER-team02
+# team02-s22-5pm-3 
 
 * Production: <https://s22-5pm-3-team02.herokuapp.com>
 * QA: <https://s22-5pm-3-team02-qa.herokuapp.com>
