@@ -39,7 +39,7 @@ public class UCSBDiningCommonsMenuItemController extends ApiController {
         return commons;
     }
 
-    @ApiOperation(value = "Get a single menu item")
+    @ApiOperation(value = "Create a new menu item")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/post")
     public UCSBDiningCommonsMenuItem postMenuItem(
