@@ -23,7 +23,7 @@ import javax.validation.Valid;
 
 
 @Api(description = "UCSBDiningCommonsMenuItem")
-@RequestMapping("/api/ucsbdiningcommonsmenuitem")
+@RequestMapping("/api/UCSBDiningCommonsMenuItem")
 @RestController
 @Slf4j
 public class UCSBDiningCommonsMenuItemController extends ApiController {
