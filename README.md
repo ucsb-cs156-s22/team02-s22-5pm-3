@@ -1,8 +1,7 @@
-# STARTER-team02
+# team02-s22-5pm-3 
 
-TODO: Add a link to the deployed Heroku app for your team here, e.g.
-
-* <https://s22-7pm-3-team02.herokuapp.com>
+* Production: <https://s22-5pm-3-team02.herokuapp.com>
+* QA: <https://s22-5pm-3-team02-qa.herokuapp.com>
 
 # Setup before running application
 
