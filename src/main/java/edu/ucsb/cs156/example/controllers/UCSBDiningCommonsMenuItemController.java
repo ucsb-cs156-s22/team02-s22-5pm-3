@@ -38,4 +38,34 @@ public class UCSBDiningCommonsMenuItemController extends ApiController {
         Iterable<UCSBDiningCommonsMenuItem> commons = ucsbDinigCommonsMenuItemRepository.findAll();
         return commons;
     }
+
+    @ApiOperation(value = "Get a single UCSB dining commons menu item")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping("")
+    public UCSBDiningCommonsMenuItem getById(
+            @ApiParam("id of item to get") @RequestParam Long id){
+            UCSBDiningCommonsMenuItem menuItem = ucsbDiningCommonsMenuItemRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(UCSBDiningCommonsMenuItem.class, id));
+
+            return menuItem;
+    }
+
+    @ApiOperation(value = "Create a new menu item")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PostMapping("/post")
+    public UCSBDiningCommonsMenuItem postMenuItem(
+            @ApiParam("name of dining commons where dish can be found, e.g. Carillo") @RequestParam String diningCommonsCode,
+            @ApiParam("name of the dish, e.g. Chicken Fried Rice") @RequestParam String name,
+            @ApiParam("name of station in the dining commons serving the dish, e.g. Entrees") @RequestParam String station
+            )
+    {
+        UCSBDiningCommonsMenuItem menuItem = new UCSBDiningCommonsMenuItem();
+        menuItem.setDiningCommonsCode(diningCommonsCode);
+        menuItem.setName(name);
+        menuItem.setStation(station);
+
+        UCSBDiningCommonsMenuItem savedMenuItem = ucsbDiningCommonsMenuItemRepository.save(menuItem);
+
+        return savedMenuItem;
+    }
 }
