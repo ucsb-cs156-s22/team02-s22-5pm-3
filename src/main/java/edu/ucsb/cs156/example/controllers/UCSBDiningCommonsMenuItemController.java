@@ -73,7 +73,7 @@ public class UCSBDiningCommonsMenuItemController extends ApiController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("")
     public UCSBDiningCommonsMenuItem updateCommons(
-            @ApiParam("id") @RequestParam Long id,
+            @ApiParam("id of menu item to update") @RequestParam Long id,
             @RequestBody @Valid UCSBDiningCommonsMenuItem incoming) {
 
         UCSBDiningCommonsMenuItem menuItem = ucsbDiningCommonsMenuItemRepository.findById(id)
