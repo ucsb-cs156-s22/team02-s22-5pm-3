@@ -195,14 +195,14 @@ public class RecommendationRequestsControllerTests extends ControllerTestCase {
                                 .explanation("idk")
                                 .dateRequested(dateRequested)
                                 .dateNeeded(dateNeeded)
-                                .done(false)
+                                .done(true)
                                 .build();
 
                 when(recommendationRequestRepository.save(eq(recommendationRequest))).thenReturn(recommendationRequest);
 
                 // act
                 MvcResult response = mockMvc.perform(
-                                post("/api/recommendationrequests/post?requesterEmail=supman@gmail.com&professorEmail=drbob@ucsb.edu&explanation=idk&dateRequested=2022-01-03T00:00:00&dateNeeded=2022-01-05T00:00:00&done=false")
+                                post("/api/recommendationrequests/post?requesterEmail=supman@gmail.com&professorEmail=drbob@ucsb.edu&explanation=idk&dateRequested=2022-01-03T00:00:00&dateNeeded=2022-01-05T00:00:00&done=true")
                                                 .with(csrf()))
                                 .andExpect(status().isOk()).andReturn();
 
@@ -283,12 +283,15 @@ public class RecommendationRequestsControllerTests extends ControllerTestCase {
                                 .done(false)
                                 .build();
 
+                LocalDateTime dateRequested2 = LocalDateTime.parse("2022-02-03T00:00:00");
+                LocalDateTime dateNeeded2 = LocalDateTime.parse("2022-02-05T00:00:00");
+
                 RecommendationRequest recommendationRequestEdited = RecommendationRequest.builder()
-                                .requesterEmail("supman@gmail.com")
-                                .professorEmail("drbob@ucsb.edu")
-                                .explanation("idk just do it please")
-                                .dateRequested(dateRequested)
-                                .dateNeeded(dateNeeded)
+                                .requesterEmail("supman@g341111mail.com")
+                                .professorEmail("pako@ucsb.edu")
+                                .explanation("idk jueeeeeeeest do it please")
+                                .dateRequested(dateRequested2)
+                                .dateNeeded(dateNeeded2)
                                 .done(true)
                                 .build();
 
