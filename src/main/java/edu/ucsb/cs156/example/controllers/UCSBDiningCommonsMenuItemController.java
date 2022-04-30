@@ -29,13 +29,13 @@ import javax.validation.Valid;
 public class UCSBDiningCommonsMenuItemController extends ApiController {
 
     @Autowired
-    UCSBDiningCommonsMeuItemRepository ucsbDiningCommonsMenuItemRepository;
+    UCSBDiningCommonsMenuItemRepository ucsbDiningCommonsMenuItemRepository;
 
-	@ApiOperation
+	@ApiOperation(value = "List all UCSB dining commons menu items")
 	@PreAuthorize("hasRole('ROLE_USER')")
 	@GetMapping("/all")
-	public Iterable<UCSBDiningCommonsMenuItem> allCommons() {
-        Iterable<UCSBDiningCommonsMenuItem> commons = ucsbDinigCommonsMenuItemRepository.findAll();
+	public Iterable<UCSBDiningCommonsMenuItem> allMenuItems() {
+        Iterable<UCSBDiningCommonsMenuItem> commons = ucsbDiningCommonsMenuItemRepository.findAll();
         return commons;
     }
 
@@ -68,4 +68,37 @@ public class UCSBDiningCommonsMenuItemController extends ApiController {
 
         return savedMenuItem;
     }
+
+    @ApiOperation(value = "Delete a menu item")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @DeleteMapping("")
+    public Object deleteMenuItem(
+            @ApiParam("id of menu item to delete") @RequestParam Long id) {
+        UCSBDiningCommonsMenuItem menuItem = ucsbDiningCommonsMenuItemRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(UCSBDiningCommonsMenuItem.class, id));
+
+        ucsbDiningCommonsMenuItemRepository.delete(menuItem);
+        return genericMessage("UCSBDiningCommonsMenuItem with id %s deleted".formatted(id));
+    }
+
+    @ApiOperation(value = "Update a single menu item")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PutMapping("")
+    public UCSBDiningCommonsMenuItem updateMenuItem(
+            @ApiParam("id of menu item to update") @RequestParam Long id,
+            @RequestBody @Valid UCSBDiningCommonsMenuItem incoming) {
+
+        UCSBDiningCommonsMenuItem menuItem = ucsbDiningCommonsMenuItemRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(UCSBDiningCommonsMenuItem.class, id));
+
+
+        menuItem.setDiningCommonsCode(incoming.getDiningCommonsCode());  
+        menuItem.setName(incoming.getName());
+        menuItem.setStation(incoming.getStation());
+
+        ucsbDiningCommonsMenuItemRepository.save(menuItem);
+
+        return menuItem;
+    }
+
 }
