@@ -48,14 +48,14 @@ public class HelpRequestController extends ApiController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("")
     public HelpRequest getById(
-            @ApiParam("id") @RequestParam Long id) {
+            @ApiParam("help request id") @RequestParam Long id) {
         HelpRequest helpRequest = helpRequestRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(HelpRequest.class, id));
 
         return helpRequest;
     }
 
-    @ApiOperation(value = "Create a new help request")
+    @ApiOperation(value = "Create a single new help request")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/post")
     public HelpRequest postHelpRequest(
@@ -86,11 +86,11 @@ public class HelpRequestController extends ApiController {
         return savedHelpRequest;
     }
 
-    @ApiOperation(value = "Delete a help request")
+    @ApiOperation(value = "Delete a single help request")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("")
     public Object deleteHelpRequest(
-            @ApiParam("id") @RequestParam Long id) {
+            @ApiParam("help request id") @RequestParam Long id) {
         HelpRequest helpRequest = helpRequestRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(HelpRequest.class, id));
 
@@ -102,7 +102,7 @@ public class HelpRequestController extends ApiController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("")
     public HelpRequest updateHelpRequest(
-            @ApiParam("id") @RequestParam Long id,
+            @ApiParam("help request id") @RequestParam Long id,
             @ApiParam("incoming (update)") @RequestBody @Valid HelpRequest incoming) {
 
         HelpRequest helpRequest = helpRequestRepository.findById(id)
