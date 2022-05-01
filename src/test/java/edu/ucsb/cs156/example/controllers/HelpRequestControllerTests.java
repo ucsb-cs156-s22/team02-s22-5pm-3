@@ -190,14 +190,14 @@ public class HelpRequestControllerTests extends ControllerTestCase {
                 .tableOrBreakoutRoom("test-table")
                 .requestTime(ldt1)
                 .explanation("test-explanation")
-                .solved(false)
+                .solved(true)
                 .build();
 
         when(helpRequestRepository.save(eq(helpRequest1))).thenReturn(helpRequest1);
 
         // act
         MvcResult response = mockMvc.perform(
-             post("/api/helprequests/post?requesterEmail=test-email@email.com&teamId=test-team-3&tableOrBreakoutRoom=test-table&requestTime=2022-04-29T00:00:00&explanation=test-explanation&solved=false")
+             post("/api/helprequests/post?requesterEmail=test-email@email.com&teamId=test-team-3&tableOrBreakoutRoom=test-table&requestTime=2022-04-29T00:00:00&explanation=test-explanation&solved=true")
              .with(csrf()))
          .andExpect(status().isOk()).andReturn();
 
@@ -285,7 +285,7 @@ public class HelpRequestControllerTests extends ControllerTestCase {
                 .tableOrBreakoutRoom("test-table-2")
                 .requestTime(ldt2)
                 .explanation("test-explanation-2")
-                .solved(false)
+                .solved(true)
                 .build();
 
         String requestBody = mapper.writeValueAsString(helpRequestEdited);
