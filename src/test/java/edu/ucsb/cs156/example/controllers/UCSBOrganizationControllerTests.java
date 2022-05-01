@@ -55,7 +55,7 @@ public class UCSBOrganizationControllerTests extends ControllerTestCase {
 
         @Test
         public void logged_out_users_cannot_get_by_id() throws Exception {
-                mockMvc.perform(get("/api/ucsborganization?orgCode=ZPR"))
+                mockMvc.perform(get("/api/ucsborganization?orgCode=ABC"))
                     .andExpect(status().is(403)); // logged out users can't get by id
         }
 
@@ -195,15 +195,15 @@ public class UCSBOrganizationControllerTests extends ControllerTestCase {
                 UCSBOrganization epic = UCSBOrganization.builder()
                     .orgCode("EPIC")
                     .orgTranslationShort("EPIC")
-                    .orgTranslation("EPIC MOVEMENT")
-                    .inactive(false)
+                    .orgTranslation("EPIC-MOVEMENT")
+                    .inactive(true)
                     .build();
 
                 when(ucsbOrganizationRepository.save(eq(epic))).thenReturn(epic);
 
                 // act
                 MvcResult response = mockMvc.perform(
-                    post("/api/ucsborganization/post?orgCode=EPIC&orgTranslationShort=EPIC&orgTranslation=EPIC MOVEMENT&inactive=false")
+                    post("/api/ucsborganization/post?orgCode=EPIC&orgTranslationShort=EPIC&orgTranslation=EPIC-MOVEMENT&inactive=true")
                     .with(csrf()))
                     .andExpect(status().isOk()).andReturn();
 
@@ -222,7 +222,7 @@ public class UCSBOrganizationControllerTests extends ControllerTestCase {
                 UCSBOrganization epic = UCSBOrganization.builder()
                                 .orgCode("EPIC")
                                 .orgTranslationShort("EPIC")
-                                .orgTranslation("EPIC MOVEMENT")
+                                .orgTranslation("EPIC-MOVEMENT")
                                 .inactive(false)
                                 .build();
 
@@ -253,7 +253,7 @@ public class UCSBOrganizationControllerTests extends ControllerTestCase {
                 // act
                 MvcResult response = mockMvc.perform(
                                 delete("/api/ucsborganization?orgCode=CODERSB")
-                                                .with(csrf()))
+                                    .with(csrf()))
                                 .andExpect(status().isNotFound()).andReturn();
 
                 // assert
@@ -287,12 +287,12 @@ public class UCSBOrganizationControllerTests extends ControllerTestCase {
 
                 // act
                 MvcResult response = mockMvc.perform(
-                                put("/api/ucsborganization?orgCode=OSLI")
-                                                .contentType(MediaType.APPLICATION_JSON)
-                                                .characterEncoding("utf-8")
-                                                .content(requestBody)
-                                                .with(csrf()))
-                                .andExpect(status().isOk()).andReturn();
+                    put("/api/ucsborganization?orgCode=OSLI")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .characterEncoding("utf-8")
+                        .content(requestBody)
+                        .with(csrf()))
+                    .andExpect(status().isOk()).andReturn();
 
                 // assert
                 verify(ucsbOrganizationRepository, times(1)).findById("OSLI");
@@ -310,7 +310,7 @@ public class UCSBOrganizationControllerTests extends ControllerTestCase {
                     .orgCode("KRC")
                     .orgTranslationShort("KOREAN RADIO CL")
                     .orgTranslation("KOREAN RADIO CLUB")
-                    .inactive(false)
+                    .inactive(true)
                     .build();
 
                 String requestBody = mapper.writeValueAsString(editedOrganization);
