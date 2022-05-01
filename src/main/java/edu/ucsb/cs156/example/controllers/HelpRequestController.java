@@ -62,7 +62,7 @@ public class HelpRequestController extends ApiController {
             @ApiParam("requesterEmail") @RequestParam String requesterEmail,
             @ApiParam("teamId") @RequestParam String teamId,
             @ApiParam("tableOrBreakoutRoom") @RequestParam String tableOrBreakoutRoom,
-            @ApiParam("date (in iso format, e.g. YYYY-mm-ddTHH:MM:SS; see https://en.wikipedia.org/wiki/ISO_8601)") @RequestParam("localDateTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime requestTime,
+            @ApiParam("date (in iso format, e.g. YYYY-mm-ddTHH:MM:SS; see https://en.wikipedia.org/wiki/ISO_8601)") @RequestParam("requestTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime requestTime,
             @ApiParam("explanation") @RequestParam String explanation,
             @ApiParam("solved") @RequestParam boolean solved)
 
@@ -103,7 +103,7 @@ public class HelpRequestController extends ApiController {
     @PutMapping("")
     public HelpRequest updateHelpRequest(
             @ApiParam("id") @RequestParam Long id,
-            @RequestBody @Valid HelpRequest incoming) {
+            @ApiParam("incoming (update)") @RequestBody @Valid HelpRequest incoming) {
 
         HelpRequest helpRequest = helpRequestRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(HelpRequest.class, id));
