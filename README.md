@@ -1,8 +1,9 @@
 # team02-s22-5pm-3 
-[![codecov](https://codecov.io/gh/ucsb-cs156-s22/team02-s22-5pm-3/branch/main/graph/badge.svg?token=xdzehLHVhE)](https://codecov.io/gh/ucsb-cs156-s22/team02-s22-5pm-3)
 
 * Production: <https://s22-5pm-3-team02.herokuapp.com>
 * QA: <https://s22-5pm-3-team02-qa.herokuapp.com>
+
+[![codecov](https://codecov.io/gh/ucsb-cs156-s22/team02-s22-5pm-3/branch/main/graph/badge.svg?token=xdzehLHVhE)](https://codecov.io/gh/ucsb-cs156-s22/team02-s22-5pm-3)
 
 # Setup before running application
 
